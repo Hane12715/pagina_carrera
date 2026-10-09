@@ -118,7 +118,21 @@ const CONTENIDO = {
       { imagen: "", titulo: "Taller" },
       { imagen: "", titulo: "Visita " },
       { imagen: "", titulo: "Charla" },
+      { imagen: "", titulo: "Convivio" },
+      { imagen: "", titulo: "Convivio" },
+      { imagen: "", titulo: "Convivio" },
       { imagen: "", titulo: "Convivio" }
     ]
+  },
+    footer: {
+    descripcion: "Página oficial de las carreras de Ingeniería en Sistemas e Ingeniería en Ciencia de Datos e Inteligencia Artificial de UNITEC",
+    redes: [
+      { icono: "instagram", url: "" },   // vacío = no se muestra
+    ],
+    contacto: [
+      { icono: "📍", texto: "Facultad de ingenieria", url: "" },
+      { icono: "🕒", texto: "Lunes a viernes", url: "" }
+    ],
+    credito: "Hecho por The Backend"
   }
 };

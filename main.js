@@ -231,3 +231,37 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') moverFoto(-1);
   if (e.key === 'ArrowRight') moverFoto(1);
 });
+// ---------- Footer ----------
+const foot = CONTENIDO.footer;
+document.getElementById('footLogo').innerHTML = CONTENIDO.sitio.logo;
+document.getElementById('footDescripcion').textContent = foot.descripcion;
+
+document.getElementById('footRedes').innerHTML = foot.redes
+  .filter(r => r.url)
+  .map(r => `
+    <a href="${r.url}" target="_blank" aria-label="${r.icono}">
+      <img src="https://cdn.simpleicons.org/${r.icono}/ffffff" alt="${r.icono}">
+    </a>`)
+  .join('');
+
+document.getElementById('footMenu').innerHTML = CONTENIDO.menu
+  .map(m => `<li><a href="#${m.id}">${m.texto}</a></li>`)
+  .join('');
+
+document.getElementById('footCarreras').innerHTML = CONTENIDO.planes.carreras
+  .map(c => c.pdf
+    ? `<li><a href="${c.pdf}" download>⬇ ${c.nombre}</a></li>`
+    : `<li><span>${c.nombre}</span></li>`)
+  .join('');
+
+// Contacto
+document.getElementById('footContacto').innerHTML = foot.contacto
+  .map(c => {
+    const texto = c.url ? `<a href="${c.url}">${c.texto}</a>` : `<span>${c.texto}</span>`;
+    return `<li><span class="contacto-icono">${c.icono}</span>${texto}</li>`;
+  })
+  .join('');
+
+// Año automático
+document.getElementById('footCopy').textContent =
+  `© ${new Date().getFullYear()} · ${foot.credito}`;
