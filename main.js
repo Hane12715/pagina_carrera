@@ -265,3 +265,47 @@ document.getElementById('footContacto').innerHTML = foot.contacto
 // Año automático
 document.getElementById('footCopy').textContent =
   `© ${new Date().getFullYear()} · ${foot.credito}`;
+
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('con-sombra', window.scrollY > 10);
+});
+
+const linksMenu = document.querySelectorAll('#nav a');
+
+const observadorMenu = new IntersectionObserver(entradas => {
+  entradas.forEach(e => {
+    if (e.isIntersecting) {
+      linksMenu.forEach(a => {
+        a.classList.toggle('activo', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });   
+
+CONTENIDO.menu.forEach(m => {
+  const seccion = document.getElementById(m.id);
+  if (seccion) observadorMenu.observe(seccion);
+});
+
+const animables = document.querySelectorAll(
+  '.seccion-intro, .tarjeta-carrera, .tarjeta-mini, .tarjeta-foto, .tarjeta-grupo, .faq-item, .gal-item'
+);
+
+animables.forEach(el => {
+  el.classList.add('revelar');
+  // retraso según su posición, para que aparezcan en cascada
+  const indice = [...el.parentElement.children].indexOf(el);
+  el.style.animationDelay = `${indice * 80}ms`;
+});
+
+const observadorRevelar = new IntersectionObserver((entradas, obs) => {
+  entradas.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target); 
+    }
+  });
+}, { threshold: 0.15 });
+
+animables.forEach(el => observadorRevelar.observe(el));  
