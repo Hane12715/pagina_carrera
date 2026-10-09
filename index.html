@@ -56,7 +56,65 @@
         <div class="panel" id="oporPanel"></div>
       </div>
     </section>
+        <!--equipos-->
+    <section class="seccion" id="recursos">
+      <div class="contenedor recursos-grid">
+        <div class="seccion-intro">
+          <span class="etiqueta" id="recEtiqueta"></span>
+          <h2 id="recTitulo"></h2>
+          <p id="recDescripcion"></p>
+        </div>
+        <div class="tarjetas-foto" id="recTarjetas"></div>
+      </div>
+    </section>
+        <!--comunidad-->
+    <section class="seccion seccion-alt" id="comunidad">
+      <div class="contenedor comunidad-grid">
+        <div class="seccion-intro">
+          <span class="etiqueta" id="comEtiqueta"></span>
+          <h2 id="comTitulo"></h2>
+          <p id="comDescripcion"></p>
+        </div>
+        <div class="tarjetas-grupo" id="comTarjetas"></div>
+      </div>
+      <div class="contenedor">
+        <div class="panel" id="comPanel"></div>
+      </div>
+    </section>
+        <!--faq galeria-->
+    <section class="seccion" id="galeria">
+      <div class="contenedor faq-galeria">
+
+        <div id="faq">
+          <div class="seccion-intro">
+            <span class="etiqueta" id="faqEtiqueta"></span>
+            <h2 id="faqTitulo"></h2>
+            <p id="faqDescripcion"></p>
+          </div>
+          <div class="faq-lista" id="faqLista"></div>
+        </div>
+
+        <div>
+          <div class="seccion-intro">
+            <span class="etiqueta" id="galEtiqueta"></span>
+            <h2 id="galTitulo"></h2>
+            <p id="galDescripcion"></p>
+          </div>
+          <div class="galeria-grid" id="galGrid"></div>
+        </div>
+
+      </div>
+    </section>
   </main>
+  <div class="lightbox" id="lightbox">
+    <button class="lb-btn lb-cerrar" id="lbCerrar" aria-label="Cerrar">✕</button>
+    <button class="lb-btn lb-anterior" id="lbAnterior" aria-label="Anterior">‹</button>
+    <figure>
+      <img id="lbImg" alt="">
+      <figcaption id="lbTitulo"></figcaption>
+    </figure>
+    <button class="lb-btn lb-siguiente" id="lbSiguiente" aria-label="Siguiente">›</button>
+  </div>
 
   <script src="contenido.js"></script>
   <script src="main.js"></script>

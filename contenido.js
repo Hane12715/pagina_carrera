@@ -17,7 +17,7 @@ const CONTENIDO = {
     titulo: "Bienvenido a la página oficial de tu carrera",
     descripcion: "Aquí encontrarás toda la información que necesitas sobre Ingeniería en Sistemas e Ingeniería en Ciencia de Datos e Inteligencia Artificial. Explora, conoce y aprovecha todo lo que hay para ti.",
     boton: "↓ Comenzar a explorar",
-    imagen: "https://i.pinimg.com/1200x/0d/fa/e6/0dfae65f15d971b19689cd1288adb4e5.jpg",   
+    imagen: "https://i.pinimg.com/1200x/bc/d0/af/bcd0af5f67c485d4158e6cc35286fdee.jpg",   
     nota: ""
   },
 
@@ -54,6 +54,71 @@ const CONTENIDO = {
       { icono: "🏅", titulo: "Hackathons",            info: "" },
       { icono: "🏅", titulo: "Comunidad tecnológica",                info: "" },
       { icono: "🏅", titulo: "Prácticas profesionales e internacionalización", info: "" }
+    ]
+  },
+    recursos: {
+    etiqueta: "Equipo y espacios disponibles",
+    titulo: "Recursos que impulsan tu aprendizaje",
+    descripcion: "Contamos con laboratorios, equipos y herramientas especializadas para que desarrolles todo tu potencial.",
+    items: [
+      { nombre: "Laboratorio de IA",            imagen: "" },   
+      { nombre: "PCs para entrenamiento de IA", imagen: "" },
+      { nombre: "Robot Temi",                   imagen: "" },
+      { nombre: "Lentes de realidad virtual",   imagen: "" }
+    ]
+  },
+    comunidad: {
+    etiqueta: "Comunidad estudiantil",
+    titulo: "Juntos hacemos la diferencia",
+    descripcion: "Aquí encontrarás los grupos estudiantiles para que te involucres, compartas ideas y construyas nuevas experiencias.",
+    grupos: [
+      {
+        nombre: "The Backend",
+        tipo: "Asociación estudiantil",
+        logo: "⚙️",         
+        imagen: "",          
+        descripcion: "La asociación estudiantil de nuestras carreras",
+        info: "",       
+        redes: [
+          { nombre: "Instagram", url: "" }
+        ]     
+      },
+      {
+        nombre: "Club de Blockchain",
+        tipo: "Club estudiantil",
+        logo: "⛓️",
+        imagen: "",
+        descripcion: "Un espacio para aprender y experimentar con blockchain.",
+        info: "",
+        redes: [
+          { nombre: "Instagram", url: "" }
+        ]
+      }
+    ]
+  },
+    faq: {
+    etiqueta: "Preguntas frecuentes",
+    titulo: "Resuelve tus dudas",
+    descripcion: "Aquí respondemos las preguntas más comunes sobre nuestras carreras, procesos y recursos.",
+    preguntas: [
+      { pregunta: "¿Dónde puedo encontrar mi plan de estudio?", respuesta: "Puedes descargarlo en la sección <a href='#planes'>Planes de estudio</a>." },
+      { pregunta: "¿Qué certificaciones puedo obtener?",        respuesta: "Información próximamente." },
+      { pregunta: "¿Qué laboratorios puedo utilizar?",          respuesta: "Revisa la sección <a href='#recursos'>Equipo disponible</a>." },
+      { pregunta: "¿Qué comunidades estudiantiles existen?",    respuesta: "The Backend y el Club de Blockchain. Conócelos en <a href='#comunidad'>Comunidad</a>." },
+      { pregunta: "¿Dónde puedo solicitar información académica?", respuesta: "Información próximamente." }
+    ]
+  },
+
+  galeria: {
+    etiqueta: "Galería de eventos",
+    titulo: "Nuestra vida en imágenes",
+    descripcion: "Talleres, charlas, hackathons, visitas académicas y mucho más. Así vivimos la experiencia.",
+    fotos: [
+      { imagen: "", titulo: "Hackathon " },   
+      { imagen: "", titulo: "Taller" },
+      { imagen: "", titulo: "Visita " },
+      { imagen: "", titulo: "Charla" },
+      { imagen: "", titulo: "Convivio" }
     ]
   }
 };

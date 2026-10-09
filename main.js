@@ -11,6 +11,27 @@ function crearIcono(icono) {
   return esImagen ? `<img src="${icono}" alt="">` : icono;
 }
 
+function activarPanel(tarjetas, panel, alAbrir) {
+  function cerrar() {
+    panel.classList.remove('abierto');
+    tarjetas.forEach(t => t.classList.remove('activa'));
+  }
+
+  tarjetas.forEach((tarjeta, i) => {
+    tarjeta.addEventListener('click', () => {
+      const yaAbierta = tarjeta.classList.contains('activa');
+      cerrar();
+      if (yaAbierta) return;
+
+      tarjeta.classList.add('activa');
+      panel.innerHTML = alAbrir(i) + '<button class="panel-cerrar" aria-label="Cerrar">✕</button>';
+      panel.classList.add('abierto');
+      panel.querySelector('.panel-cerrar').addEventListener('click', cerrar);
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+}
+
 //Logo
 document.getElementById('logo').innerHTML = CONTENIDO.sitio.logo;
 
@@ -82,4 +103,131 @@ activarPanel([...contOpor.children], document.getElementById('oporPanel'), i => 
   return `
     <h3 class="panel-titulo">${crearIcono(item.icono)} ${item.titulo}</h3>
     <div class="panel-texto">${item.info || '<p class="proximamente">Información próximamente.</p>'}</div>`;
+});
+//equipo disponible
+const rec = CONTENIDO.recursos;
+document.getElementById('recEtiqueta').textContent = rec.etiqueta;
+document.getElementById('recTitulo').textContent = rec.titulo;
+document.getElementById('recDescripcion').textContent = rec.descripcion;
+
+const contRec = document.getElementById('recTarjetas');
+rec.items.forEach(item => {
+  const tarjeta = document.createElement('div');
+  tarjeta.className = 'tarjeta-foto';
+  tarjeta.innerHTML = `
+    <div class="foto"></div>
+    <span class="foto-nombre">${item.nombre}</span>`;
+  pintarImagen(tarjeta.querySelector('.foto'), item.imagen, 'Foto');
+  contRec.appendChild(tarjeta);
+});
+
+//comunidad estudiantil
+const com = CONTENIDO.comunidad;
+document.getElementById('comEtiqueta').textContent = com.etiqueta;
+document.getElementById('comTitulo').textContent = com.titulo;
+document.getElementById('comDescripcion').textContent = com.descripcion;
+
+const contCom = document.getElementById('comTarjetas');
+com.grupos.forEach(g => {
+  const redes = g.redes
+    .filter(r => r.url)   // solo las que tienen link
+    .map(r => `<a href="${r.url}" target="_blank" class="grupo-red">${r.nombre}</a>`)
+    .join('');
+
+  const tarjeta = document.createElement('div');
+  tarjeta.className = 'tarjeta-grupo';
+  tarjeta.innerHTML = `
+    <div class="grupo-foto">
+      <div class="foto"></div>
+      <span class="grupo-logo">${crearIcono(g.logo)}</span>
+    </div>
+    <div class="grupo-cuerpo">
+      <span class="grupo-tipo">${g.tipo}</span>
+      <h3>${g.nombre}</h3>
+      <p>${g.descripcion}</p>
+      <div class="grupo-acciones">
+        <button class="btn grupo-mas">Conocer más →</button>
+        ${redes}
+      </div>
+    </div>`;
+  pintarImagen(tarjeta.querySelector('.foto'), g.imagen, 'Foto del grupo');
+  contCom.appendChild(tarjeta);
+});
+
+activarPanel([...contCom.querySelectorAll('.grupo-mas')], document.getElementById('comPanel'), i => {
+  const g = com.grupos[i];
+  return `
+    <h3 class="panel-titulo">${g.nombre}</h3>
+    <div class="panel-texto">${g.info || '<p class="proximamente">Información próximamente.</p>'}</div>`;
+});
+
+// ---------- FAQ ----------
+const faq = CONTENIDO.faq;
+document.getElementById('faqEtiqueta').textContent = faq.etiqueta;
+document.getElementById('faqTitulo').textContent = faq.titulo;
+document.getElementById('faqDescripcion').textContent = faq.descripcion;
+
+const faqLista = document.getElementById('faqLista');
+faq.preguntas.forEach(p => {
+  faqLista.innerHTML += `
+    <details class="faq-item" name="faq">
+      <summary>${p.pregunta}</summary>
+      <div class="faq-respuesta">${p.respuesta}</div>
+    </details>`;
+});
+
+//galeria
+const gal = CONTENIDO.galeria;
+document.getElementById('galEtiqueta').textContent = gal.etiqueta;
+document.getElementById('galTitulo').textContent = gal.titulo;
+document.getElementById('galDescripcion').textContent = gal.descripcion;
+
+const fotosConImagen = gal.fotos.filter(f => f.imagen);   // solo estas se abren en grande
+const galGrid = document.getElementById('galGrid');
+
+gal.fotos.forEach(f => {
+  const item = document.createElement('div');
+  item.className = 'gal-item';
+  item.innerHTML = `<div class="foto"></div><span class="gal-titulo">${f.titulo}</span>`;
+  pintarImagen(item.querySelector('.foto'), f.imagen, '');
+
+  if (f.imagen) {
+    item.classList.add('clickeable');
+    item.addEventListener('click', () => abrirLightbox(fotosConImagen.indexOf(f)));
+  }
+  galGrid.appendChild(item);
+});
+
+//ligthbox
+const lightbox = document.getElementById('lightbox');
+let fotoActual = 0;
+
+function mostrarFoto() {
+  const f = fotosConImagen[fotoActual];
+  document.getElementById('lbImg').src = f.imagen;
+  document.getElementById('lbTitulo').textContent = f.titulo;
+}
+function abrirLightbox(i) {
+  fotoActual = i;
+  mostrarFoto();
+  lightbox.classList.add('abierto');
+}
+function cerrarLightbox() {
+  lightbox.classList.remove('abierto');
+}
+function moverFoto(paso) {
+  fotoActual = (fotoActual + paso + fotosConImagen.length) % fotosConImagen.length;
+  mostrarFoto();
+}
+
+document.getElementById('lbCerrar').addEventListener('click', cerrarLightbox);
+document.getElementById('lbAnterior').addEventListener('click', () => moverFoto(-1));
+document.getElementById('lbSiguiente').addEventListener('click', () => moverFoto(1));
+lightbox.addEventListener('click', e => { if (e.target === lightbox) cerrarLightbox(); });
+
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('abierto')) return;
+  if (e.key === 'Escape') cerrarLightbox();
+  if (e.key === 'ArrowLeft') moverFoto(-1);
+  if (e.key === 'ArrowRight') moverFoto(1);
 });
